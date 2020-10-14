@@ -12,28 +12,32 @@ namespace SplitCost
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// 計算ボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnclc_Click(object sender, EventArgs e)
         {
+            
             double money;
             int person;
-            double addTax;
-            const double tax = 0.08;
+            Calc calc = new Calc();
 
             money = int.Parse(txtTaxFree.Text);
             person = int.Parse(txtPerson.Text);
-            addTax = money*(1 + tax);
-            double onePersonMoney =addTax / person;
 
-            money = (int)onePersonMoney;
+            money = (int)calc.OnePersonMoney(money,person);
             lblonePerson.Text = money + " 円";
 
-            double remainder = addTax % person;
-            lblSplit.Text = (int)remainder + " 円";
+            lblSplit.Text = (int)calc.Remainder(person) + " 円";
             
         }
     }
